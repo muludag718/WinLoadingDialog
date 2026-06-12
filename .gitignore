@@ -361,3 +361,19 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+
+# WinLoadingDialog local files
+*.csproj.user
+*.DotSettings.user
+
+# Local test output
+TestResults/
+coverage/
+coverage*/
+
+# Temporary archives
+*.zip
+*.rar
+*.7z
