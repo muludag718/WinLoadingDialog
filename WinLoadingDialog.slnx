@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="WinLoadingDialog.Test/WinLoadingDialog.Test.csproj" />
+    <Project Path="WinLoadingDialog/WinLoadingDialog.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="WinLoadingDialog.UnitTests/WinLoadingDialog.UnitTests.csproj" Id="528ed59f-2568-4b8d-b681-62df5c3fb672" />
+  </Folder>
+</Solution>
