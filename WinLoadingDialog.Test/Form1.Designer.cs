@@ -1,4 +1,6 @@
-﻿namespace WinLoadingDialog.Test;
+﻿using WinLoadingDialog.Controls;
+
+namespace WinLoadingDialog.Test;
 
 partial class Form1
 {
@@ -16,338 +18,633 @@ partial class Form1
 
     private void InitializeComponent()
     {
-        tableMain = new TableLayoutPanel();
-        panelHeader = new Panel();
-        lblTitle = new Label();
-        lblSubtitle = new Label();
-        groupSpinnerModes = new GroupBox();
-        flowSpinnerModes = new FlowLayoutPanel();
-        btnArc = new Button();
-        btnCircle = new Button();
-        btnCircularProgress = new Button();
-        btnDots = new Button();
-        btnPulse = new Button();
-        btnRing = new Button();
-        btnBars = new Button();
-        btnDualRing = new Button();
-        groupThemes = new GroupBox();
-        flowThemes = new FlowLayoutPanel();
-        btnLightTheme = new Button();
-        btnDarkTheme = new Button();
-        btnCustomTheme = new Button();
-        btnTurkish = new Button();
-        groupStates = new GroupBox();
-        flowStates = new FlowLayoutPanel();
-        btnSuccess = new Button();
-        btnError = new Button();
+        mainLayout = new TableLayoutPanel();
+        headerPanel = new Panel();
+        lblHeaderTitle = new Label();
+        lblHeaderSubtitle = new Label();
+        contentLayout = new TableLayoutPanel();
+        leftPanel = new Panel();
+        groupActions = new GroupBox();
+        actionsLayout = new TableLayoutPanel();
+        btnShowLoading = new Button();
+        btnShowSuccess = new Button();
+        btnShowError = new Button();
         btnRunAsync = new Button();
         btnBeginScope = new Button();
-        groupPanelDemo = new GroupBox();
-        tablePanelDemo = new TableLayoutPanel();
-        panelDemoTarget = new Panel();
-        lblPanelDemo = new Label();
-        flowPanelButtons = new FlowLayoutPanel();
-        btnPanelLoading = new Button();
-        btnPanelSuccess = new Button();
-        btnPanelError = new Button();
-
-        tableMain.SuspendLayout();
-        panelHeader.SuspendLayout();
-        groupSpinnerModes.SuspendLayout();
-        flowSpinnerModes.SuspendLayout();
-        groupThemes.SuspendLayout();
-        flowThemes.SuspendLayout();
-        groupStates.SuspendLayout();
-        flowStates.SuspendLayout();
-        groupPanelDemo.SuspendLayout();
-        tablePanelDemo.SuspendLayout();
-        panelDemoTarget.SuspendLayout();
-        flowPanelButtons.SuspendLayout();
+        btnShowFormOverlay = new Button();
+        btnHideAll = new Button();
+        groupSettings = new GroupBox();
+        settingsLayout = new TableLayoutPanel();
+        lblSpinnerMode = new Label();
+        cmbSpinnerMode = new ComboBox();
+        lblTheme = new Label();
+        cmbTheme = new ComboBox();
+        lblTexts = new Label();
+        cmbTexts = new ComboBox();
+        chkBlockInput = new CheckBox();
+        chkShowCard = new CheckBox();
+        lblModeCount = new Label();
+        rightLayout = new TableLayoutPanel();
+        groupPreview = new GroupBox();
+        previewPanel = new Panel();
+        previewCard = new Panel();
+        liveSpinner = new Spinner();
+        lblPreviewTitle = new Label();
+        lblPreviewSubtitle = new Label();
+        groupTarget = new GroupBox();
+        targetPanel = new Panel();
+        lblTargetSubtitle = new Label();
+        lblTargetTitle = new Label();
+        lblStatus = new Label();
+        mainLayout.SuspendLayout();
+        headerPanel.SuspendLayout();
+        contentLayout.SuspendLayout();
+        leftPanel.SuspendLayout();
+        groupActions.SuspendLayout();
+        actionsLayout.SuspendLayout();
+        groupSettings.SuspendLayout();
+        settingsLayout.SuspendLayout();
+        rightLayout.SuspendLayout();
+        groupPreview.SuspendLayout();
+        previewPanel.SuspendLayout();
+        previewCard.SuspendLayout();
+        groupTarget.SuspendLayout();
+        targetPanel.SuspendLayout();
         SuspendLayout();
-
-        // tableMain
-        tableMain.ColumnCount = 1;
-        tableMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        tableMain.Controls.Add(panelHeader, 0, 0);
-        tableMain.Controls.Add(groupSpinnerModes, 0, 1);
-        tableMain.Controls.Add(groupThemes, 0, 2);
-        tableMain.Controls.Add(groupStates, 0, 3);
-        tableMain.Controls.Add(groupPanelDemo, 0, 4);
-        tableMain.Dock = DockStyle.Fill;
-        tableMain.Location = new Point(0, 0);
-        tableMain.Name = "tableMain";
-        tableMain.Padding = new Padding(14);
-        tableMain.RowCount = 5;
-        tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 82F));
-        tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 98F));
-        tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 88F));
-        tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 88F));
-        tableMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableMain.Size = new Size(920, 640);
-        tableMain.TabIndex = 0;
-
-        // panelHeader
-        panelHeader.Controls.Add(lblTitle);
-        panelHeader.Controls.Add(lblSubtitle);
-        panelHeader.Dock = DockStyle.Fill;
-        panelHeader.Location = new Point(17, 17);
-        panelHeader.Name = "panelHeader";
-        panelHeader.Size = new Size(886, 76);
-        panelHeader.TabIndex = 0;
-
-        // lblTitle
-        lblTitle.AutoSize = true;
-        lblTitle.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
-        lblTitle.Location = new Point(0, 4);
-        lblTitle.Name = "lblTitle";
-        lblTitle.Size = new Size(264, 37);
-        lblTitle.TabIndex = 0;
-        lblTitle.Text = "WinLoadingDialog";
-
-        // lblSubtitle
-        lblSubtitle.AutoSize = true;
-        lblSubtitle.Font = new Font("Segoe UI", 10F);
-        lblSubtitle.ForeColor = Color.DimGray;
-        lblSubtitle.Location = new Point(4, 45);
-        lblSubtitle.Name = "lblSubtitle";
-        lblSubtitle.Size = new Size(520, 19);
-        lblSubtitle.TabIndex = 1;
-        lblSubtitle.Text = "Spinner modes, themes, localization, success/error states and panel overlays.";
-
-        // groupSpinnerModes
-        groupSpinnerModes.Controls.Add(flowSpinnerModes);
-        groupSpinnerModes.Dock = DockStyle.Fill;
-        groupSpinnerModes.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-        groupSpinnerModes.Location = new Point(17, 99);
-        groupSpinnerModes.Name = "groupSpinnerModes";
-        groupSpinnerModes.Padding = new Padding(12);
-        groupSpinnerModes.Size = new Size(886, 92);
-        groupSpinnerModes.TabIndex = 1;
-        groupSpinnerModes.TabStop = false;
-        groupSpinnerModes.Text = "Spinner Modes";
-
-        // flowSpinnerModes
-        flowSpinnerModes.Controls.Add(btnArc);
-        flowSpinnerModes.Controls.Add(btnCircle);
-        flowSpinnerModes.Controls.Add(btnCircularProgress);
-        flowSpinnerModes.Controls.Add(btnDots);
-        flowSpinnerModes.Controls.Add(btnPulse);
-        flowSpinnerModes.Controls.Add(btnRing);
-        flowSpinnerModes.Controls.Add(btnBars);
-        flowSpinnerModes.Controls.Add(btnDualRing);
-        flowSpinnerModes.Dock = DockStyle.Fill;
-        flowSpinnerModes.Location = new Point(12, 30);
-        flowSpinnerModes.Name = "flowSpinnerModes";
-        flowSpinnerModes.Size = new Size(862, 50);
-        flowSpinnerModes.TabIndex = 0;
-
-        // buttons
-        ConfigureDemoButton(btnArc, "Arc");
-        ConfigureDemoButton(btnCircle, "Circle");
-        ConfigureDemoButton(btnCircularProgress, "Circular Progress");
-        ConfigureDemoButton(btnDots, "Dots");
-        ConfigureDemoButton(btnPulse, "Pulse");
-        ConfigureDemoButton(btnRing, "Ring");
-        ConfigureDemoButton(btnBars, "Bars");
-        ConfigureDemoButton(btnDualRing, "Dual Ring");
-
-     
-
-        // groupThemes
-        groupThemes.Controls.Add(flowThemes);
-        groupThemes.Dock = DockStyle.Fill;
-        groupThemes.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-        groupThemes.Location = new Point(17, 197);
-        groupThemes.Name = "groupThemes";
-        groupThemes.Padding = new Padding(12);
-        groupThemes.Size = new Size(886, 82);
-        groupThemes.TabIndex = 2;
-        groupThemes.TabStop = false;
-        groupThemes.Text = "Theme / Texts";
-
-        // flowThemes
-        flowThemes.Controls.Add(btnLightTheme);
-        flowThemes.Controls.Add(btnDarkTheme);
-        flowThemes.Controls.Add(btnCustomTheme);
-        flowThemes.Controls.Add(btnTurkish);
-        flowThemes.Dock = DockStyle.Fill;
-        flowThemes.Location = new Point(12, 30);
-        flowThemes.Name = "flowThemes";
-        flowThemes.Size = new Size(862, 40);
-        flowThemes.TabIndex = 0;
-
-        ConfigureDemoButton(btnLightTheme, "Light Theme");
-        ConfigureDemoButton(btnDarkTheme, "Dark Theme");
-        ConfigureDemoButton(btnCustomTheme, "Custom Theme");
-        ConfigureDemoButton(btnTurkish, "Turkish Texts");
-    
-
-        // groupStates
-        groupStates.Controls.Add(flowStates);
-        groupStates.Dock = DockStyle.Fill;
-        groupStates.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-        groupStates.Location = new Point(17, 285);
-        groupStates.Name = "groupStates";
-        groupStates.Padding = new Padding(12);
-        groupStates.Size = new Size(886, 82);
-        groupStates.TabIndex = 3;
-        groupStates.TabStop = false;
-        groupStates.Text = "States / Helpers";
-
-        // flowStates
-        flowStates.Controls.Add(btnSuccess);
-        flowStates.Controls.Add(btnError);
-        flowStates.Controls.Add(btnRunAsync);
-        flowStates.Controls.Add(btnBeginScope);
-        flowStates.Dock = DockStyle.Fill;
-        flowStates.Location = new Point(12, 30);
-        flowStates.Name = "flowStates";
-        flowStates.Size = new Size(862, 40);
-        flowStates.TabIndex = 0;
-
-        ConfigureDemoButton(btnSuccess, "Success");
-        ConfigureDemoButton(btnError, "Error");
-        ConfigureDemoButton(btnRunAsync, "RunAsync");
-        ConfigureDemoButton(btnBeginScope, "Begin Scope");
-      
-
-        // groupPanelDemo
-        groupPanelDemo.Controls.Add(tablePanelDemo);
-        groupPanelDemo.Dock = DockStyle.Fill;
-        groupPanelDemo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-        groupPanelDemo.Location = new Point(17, 373);
-        groupPanelDemo.Name = "groupPanelDemo";
-        groupPanelDemo.Padding = new Padding(12);
-        groupPanelDemo.Size = new Size(886, 250);
-        groupPanelDemo.TabIndex = 4;
-        groupPanelDemo.TabStop = false;
-        groupPanelDemo.Text = "Panel Target Demo";
-
-        // tablePanelDemo
-        tablePanelDemo.ColumnCount = 1;
-        tablePanelDemo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        tablePanelDemo.Controls.Add(panelDemoTarget, 0, 0);
-        tablePanelDemo.Controls.Add(flowPanelButtons, 0, 1);
-        tablePanelDemo.Dock = DockStyle.Fill;
-        tablePanelDemo.Location = new Point(12, 30);
-        tablePanelDemo.Name = "tablePanelDemo";
-        tablePanelDemo.RowCount = 2;
-        tablePanelDemo.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tablePanelDemo.RowStyles.Add(new RowStyle(SizeType.Absolute, 46F));
-        tablePanelDemo.Size = new Size(862, 208);
-        tablePanelDemo.TabIndex = 0;
-
-        // panelDemoTarget
-        panelDemoTarget.BackColor = Color.FromArgb(245, 247, 250);
-        panelDemoTarget.BorderStyle = BorderStyle.FixedSingle;
-        panelDemoTarget.Controls.Add(lblPanelDemo);
-        panelDemoTarget.Dock = DockStyle.Fill;
-        panelDemoTarget.Location = new Point(3, 3);
-        panelDemoTarget.Name = "panelDemoTarget";
-        panelDemoTarget.Size = new Size(856, 156);
-        panelDemoTarget.TabIndex = 0;
-
-        // lblPanelDemo
-        lblPanelDemo.Dock = DockStyle.Fill;
-        lblPanelDemo.Font = new Font("Segoe UI", 11F);
-        lblPanelDemo.ForeColor = Color.DimGray;
-        lblPanelDemo.Location = new Point(0, 0);
-        lblPanelDemo.Name = "lblPanelDemo";
-        lblPanelDemo.Size = new Size(854, 154);
-        lblPanelDemo.TabIndex = 0;
-        lblPanelDemo.Text = "This panel is a separate loading target.";
-        lblPanelDemo.TextAlign = ContentAlignment.MiddleCenter;
-
-        // flowPanelButtons
-        flowPanelButtons.Controls.Add(btnPanelLoading);
-        flowPanelButtons.Controls.Add(btnPanelSuccess);
-        flowPanelButtons.Controls.Add(btnPanelError);
-        flowPanelButtons.Dock = DockStyle.Fill;
-        flowPanelButtons.Location = new Point(3, 165);
-        flowPanelButtons.Name = "flowPanelButtons";
-        flowPanelButtons.Size = new Size(856, 40);
-        flowPanelButtons.TabIndex = 1;
-
-        ConfigureDemoButton(btnPanelLoading, "Panel Loading");
-        ConfigureDemoButton(btnPanelSuccess, "Panel Success");
-        ConfigureDemoButton(btnPanelError, "Panel Error");
-     
-
+        // 
+        // mainLayout
+        // 
+        mainLayout.ColumnCount = 1;
+        mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        mainLayout.Controls.Add(headerPanel, 0, 0);
+        mainLayout.Controls.Add(contentLayout, 0, 1);
+        mainLayout.Controls.Add(lblStatus, 0, 2);
+        mainLayout.Dock = DockStyle.Fill;
+        mainLayout.Location = new Point(0, 0);
+        mainLayout.Name = "mainLayout";
+        mainLayout.Padding = new Padding(16);
+        mainLayout.RowCount = 3;
+        mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 82F));
+        mainLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+        mainLayout.Size = new Size(1040, 680);
+        mainLayout.TabIndex = 0;
+        // 
+        // headerPanel
+        // 
+        headerPanel.Controls.Add(lblHeaderTitle);
+        headerPanel.Controls.Add(lblHeaderSubtitle);
+        headerPanel.Dock = DockStyle.Fill;
+        headerPanel.Location = new Point(19, 19);
+        headerPanel.Name = "headerPanel";
+        headerPanel.Size = new Size(1002, 76);
+        headerPanel.TabIndex = 0;
+        // 
+        // lblHeaderTitle
+        // 
+        lblHeaderTitle.AutoSize = true;
+        lblHeaderTitle.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
+        lblHeaderTitle.ForeColor = Color.FromArgb(25, 25, 25);
+        lblHeaderTitle.Location = new Point(0, 2);
+        lblHeaderTitle.Name = "lblHeaderTitle";
+        lblHeaderTitle.Size = new Size(282, 41);
+        lblHeaderTitle.TabIndex = 0;
+        lblHeaderTitle.Text = "WinLoadingDialog";
+        // 
+        // lblHeaderSubtitle
+        // 
+        lblHeaderSubtitle.AutoSize = true;
+        lblHeaderSubtitle.Font = new Font("Segoe UI", 10F);
+        lblHeaderSubtitle.ForeColor = Color.DimGray;
+        lblHeaderSubtitle.Location = new Point(4, 47);
+        lblHeaderSubtitle.Name = "lblHeaderSubtitle";
+        lblHeaderSubtitle.Size = new Size(694, 19);
+        lblHeaderSubtitle.TabIndex = 1;
+        lblHeaderSubtitle.Text = "Interactive demo for spinner modes, themes, localization, overlay targets, success/error states and async helpers.";
+        // 
+        // contentLayout
+        // 
+        contentLayout.ColumnCount = 2;
+        contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 330F));
+        contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        contentLayout.Controls.Add(leftPanel, 0, 0);
+        contentLayout.Controls.Add(rightLayout, 1, 0);
+        contentLayout.Dock = DockStyle.Fill;
+        contentLayout.Location = new Point(19, 101);
+        contentLayout.Name = "contentLayout";
+        contentLayout.RowCount = 1;
+        contentLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        contentLayout.Size = new Size(1002, 528);
+        contentLayout.TabIndex = 1;
+        // 
+        // leftPanel
+        // 
+        leftPanel.Controls.Add(groupActions);
+        leftPanel.Controls.Add(groupSettings);
+        leftPanel.Dock = DockStyle.Fill;
+        leftPanel.Location = new Point(3, 3);
+        leftPanel.Name = "leftPanel";
+        leftPanel.Padding = new Padding(0, 0, 12, 0);
+        leftPanel.Size = new Size(324, 522);
+        leftPanel.TabIndex = 0;
+        // 
+        // groupActions
+        // 
+        groupActions.Controls.Add(actionsLayout);
+        groupActions.Dock = DockStyle.Fill;
+        groupActions.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        groupActions.Location = new Point(0, 258);
+        groupActions.Name = "groupActions";
+        groupActions.Padding = new Padding(12);
+        groupActions.Size = new Size(312, 264);
+        groupActions.TabIndex = 1;
+        groupActions.TabStop = false;
+        groupActions.Text = "Actions";
+        // 
+        // actionsLayout
+        // 
+        actionsLayout.ColumnCount = 1;
+        actionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        actionsLayout.Controls.Add(btnShowLoading, 0, 0);
+        actionsLayout.Controls.Add(btnShowSuccess, 0, 1);
+        actionsLayout.Controls.Add(btnShowError, 0, 2);
+        actionsLayout.Controls.Add(btnRunAsync, 0, 3);
+        actionsLayout.Controls.Add(btnBeginScope, 0, 4);
+        actionsLayout.Controls.Add(btnShowFormOverlay, 0, 5);
+        actionsLayout.Controls.Add(btnHideAll, 0, 6);
+        actionsLayout.Dock = DockStyle.Fill;
+        actionsLayout.Location = new Point(12, 30);
+        actionsLayout.Name = "actionsLayout";
+        actionsLayout.RowCount = 7;
+        actionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28571F));
+        actionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28571F));
+        actionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28571F));
+        actionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28571F));
+        actionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28571F));
+        actionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28571F));
+        actionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28571F));
+        actionsLayout.Size = new Size(288, 222);
+        actionsLayout.TabIndex = 0;
+        // 
+        // btnShowLoading
+        // 
+        btnShowLoading.Dock = DockStyle.Fill;
+        btnShowLoading.Font = new Font("Segoe UI", 9F);
+        btnShowLoading.Location = new Point(3, 4);
+        btnShowLoading.Margin = new Padding(3, 4, 3, 4);
+        btnShowLoading.Name = "btnShowLoading";
+        btnShowLoading.Size = new Size(282, 23);
+        btnShowLoading.TabIndex = 0;
+        btnShowLoading.Text = "Show Loading on Target";
+        btnShowLoading.UseVisualStyleBackColor = true;
+        btnShowLoading.Click += btnShowLoading_Click;
+        // 
+        // btnShowSuccess
+        // 
+        btnShowSuccess.Dock = DockStyle.Fill;
+        btnShowSuccess.Font = new Font("Segoe UI", 9F);
+        btnShowSuccess.Location = new Point(3, 35);
+        btnShowSuccess.Margin = new Padding(3, 4, 3, 4);
+        btnShowSuccess.Name = "btnShowSuccess";
+        btnShowSuccess.Size = new Size(282, 23);
+        btnShowSuccess.TabIndex = 1;
+        btnShowSuccess.Text = "Show Success";
+        btnShowSuccess.UseVisualStyleBackColor = true;
+        btnShowSuccess.Click += btnShowSuccess_Click;
+        // 
+        // btnShowError
+        // 
+        btnShowError.Dock = DockStyle.Fill;
+        btnShowError.Font = new Font("Segoe UI", 9F);
+        btnShowError.Location = new Point(3, 66);
+        btnShowError.Margin = new Padding(3, 4, 3, 4);
+        btnShowError.Name = "btnShowError";
+        btnShowError.Size = new Size(282, 23);
+        btnShowError.TabIndex = 2;
+        btnShowError.Text = "Show Error";
+        btnShowError.UseVisualStyleBackColor = true;
+        btnShowError.Click += btnShowError_Click;
+        // 
+        // btnRunAsync
+        // 
+        btnRunAsync.Dock = DockStyle.Fill;
+        btnRunAsync.Font = new Font("Segoe UI", 9F);
+        btnRunAsync.Location = new Point(3, 97);
+        btnRunAsync.Margin = new Padding(3, 4, 3, 4);
+        btnRunAsync.Name = "btnRunAsync";
+        btnRunAsync.Size = new Size(282, 23);
+        btnRunAsync.TabIndex = 3;
+        btnRunAsync.Text = "RunAsync Demo";
+        btnRunAsync.UseVisualStyleBackColor = true;
+        btnRunAsync.Click += btnRunAsync_Click;
+        // 
+        // btnBeginScope
+        // 
+        btnBeginScope.Dock = DockStyle.Fill;
+        btnBeginScope.Font = new Font("Segoe UI", 9F);
+        btnBeginScope.Location = new Point(3, 128);
+        btnBeginScope.Margin = new Padding(3, 4, 3, 4);
+        btnBeginScope.Name = "btnBeginScope";
+        btnBeginScope.Size = new Size(282, 23);
+        btnBeginScope.TabIndex = 4;
+        btnBeginScope.Text = "Begin Scope Demo";
+        btnBeginScope.UseVisualStyleBackColor = true;
+        btnBeginScope.Click += btnBeginScope_Click;
+        // 
+        // btnShowFormOverlay
+        // 
+        btnShowFormOverlay.Dock = DockStyle.Fill;
+        btnShowFormOverlay.Font = new Font("Segoe UI", 9F);
+        btnShowFormOverlay.Location = new Point(3, 159);
+        btnShowFormOverlay.Margin = new Padding(3, 4, 3, 4);
+        btnShowFormOverlay.Name = "btnShowFormOverlay";
+        btnShowFormOverlay.Size = new Size(282, 23);
+        btnShowFormOverlay.TabIndex = 5;
+        btnShowFormOverlay.Text = "Show Form Overlay";
+        btnShowFormOverlay.UseVisualStyleBackColor = true;
+        btnShowFormOverlay.Click += btnShowFormOverlay_Click;
+        // 
+        // btnHideAll
+        // 
+        btnHideAll.Dock = DockStyle.Fill;
+        btnHideAll.Font = new Font("Segoe UI", 9F);
+        btnHideAll.Location = new Point(3, 190);
+        btnHideAll.Margin = new Padding(3, 4, 3, 4);
+        btnHideAll.Name = "btnHideAll";
+        btnHideAll.Size = new Size(282, 28);
+        btnHideAll.TabIndex = 6;
+        btnHideAll.Text = "Hide / Dispose All";
+        btnHideAll.UseVisualStyleBackColor = true;
+        btnHideAll.Click += btnHideAll_Click;
+        // 
+        // groupSettings
+        // 
+        groupSettings.Controls.Add(settingsLayout);
+        groupSettings.Dock = DockStyle.Top;
+        groupSettings.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        groupSettings.Location = new Point(0, 0);
+        groupSettings.Name = "groupSettings";
+        groupSettings.Padding = new Padding(12);
+        groupSettings.Size = new Size(312, 258);
+        groupSettings.TabIndex = 0;
+        groupSettings.TabStop = false;
+        groupSettings.Text = "Demo Settings";
+        // 
+        // settingsLayout
+        // 
+        settingsLayout.ColumnCount = 1;
+        settingsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        settingsLayout.Controls.Add(lblSpinnerMode, 0, 0);
+        settingsLayout.Controls.Add(cmbSpinnerMode, 0, 1);
+        settingsLayout.Controls.Add(lblTheme, 0, 2);
+        settingsLayout.Controls.Add(cmbTheme, 0, 3);
+        settingsLayout.Controls.Add(lblTexts, 0, 4);
+        settingsLayout.Controls.Add(cmbTexts, 0, 5);
+        settingsLayout.Controls.Add(chkBlockInput, 0, 6);
+        settingsLayout.Controls.Add(chkShowCard, 0, 7);
+        settingsLayout.Controls.Add(lblModeCount, 0, 8);
+        settingsLayout.Dock = DockStyle.Fill;
+        settingsLayout.Location = new Point(12, 30);
+        settingsLayout.Name = "settingsLayout";
+        settingsLayout.RowCount = 9;
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 24F));
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        settingsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        settingsLayout.Size = new Size(288, 216);
+        settingsLayout.TabIndex = 0;
+        // 
+        // lblSpinnerMode
+        // 
+        lblSpinnerMode.Dock = DockStyle.Fill;
+        lblSpinnerMode.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+        lblSpinnerMode.ForeColor = Color.FromArgb(45, 45, 45);
+        lblSpinnerMode.Location = new Point(3, 0);
+        lblSpinnerMode.Name = "lblSpinnerMode";
+        lblSpinnerMode.Size = new Size(282, 24);
+        lblSpinnerMode.TabIndex = 0;
+        lblSpinnerMode.Text = "Spinner Mode";
+        lblSpinnerMode.TextAlign = ContentAlignment.BottomLeft;
+        // 
+        // cmbSpinnerMode
+        // 
+        cmbSpinnerMode.Dock = DockStyle.Fill;
+        cmbSpinnerMode.DropDownStyle = ComboBoxStyle.DropDownList;
+        cmbSpinnerMode.Font = new Font("Segoe UI", 9F);
+        cmbSpinnerMode.FormattingEnabled = true;
+        cmbSpinnerMode.Location = new Point(3, 27);
+        cmbSpinnerMode.Name = "cmbSpinnerMode";
+        cmbSpinnerMode.Size = new Size(282, 23);
+        cmbSpinnerMode.TabIndex = 1;
+        cmbSpinnerMode.SelectedIndexChanged += cmbSpinnerMode_SelectedIndexChanged;
+        // 
+        // lblTheme
+        // 
+        lblTheme.Dock = DockStyle.Fill;
+        lblTheme.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+        lblTheme.ForeColor = Color.FromArgb(45, 45, 45);
+        lblTheme.Location = new Point(3, 60);
+        lblTheme.Name = "lblTheme";
+        lblTheme.Size = new Size(282, 24);
+        lblTheme.TabIndex = 2;
+        lblTheme.Text = "Theme";
+        lblTheme.TextAlign = ContentAlignment.BottomLeft;
+        // 
+        // cmbTheme
+        // 
+        cmbTheme.Dock = DockStyle.Fill;
+        cmbTheme.DropDownStyle = ComboBoxStyle.DropDownList;
+        cmbTheme.Font = new Font("Segoe UI", 9F);
+        cmbTheme.FormattingEnabled = true;
+        cmbTheme.Location = new Point(3, 87);
+        cmbTheme.Name = "cmbTheme";
+        cmbTheme.Size = new Size(282, 23);
+        cmbTheme.TabIndex = 3;
+        cmbTheme.SelectedIndexChanged += cmbTheme_SelectedIndexChanged;
+        // 
+        // lblTexts
+        // 
+        lblTexts.Dock = DockStyle.Fill;
+        lblTexts.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+        lblTexts.ForeColor = Color.FromArgb(45, 45, 45);
+        lblTexts.Location = new Point(3, 120);
+        lblTexts.Name = "lblTexts";
+        lblTexts.Size = new Size(282, 24);
+        lblTexts.TabIndex = 4;
+        lblTexts.Text = "Texts";
+        lblTexts.TextAlign = ContentAlignment.BottomLeft;
+        // 
+        // cmbTexts
+        // 
+        cmbTexts.Dock = DockStyle.Fill;
+        cmbTexts.DropDownStyle = ComboBoxStyle.DropDownList;
+        cmbTexts.Font = new Font("Segoe UI", 9F);
+        cmbTexts.FormattingEnabled = true;
+        cmbTexts.Location = new Point(3, 147);
+        cmbTexts.Name = "cmbTexts";
+        cmbTexts.Size = new Size(282, 23);
+        cmbTexts.TabIndex = 5;
+        cmbTexts.SelectedIndexChanged += cmbTexts_SelectedIndexChanged;
+        // 
+        // chkBlockInput
+        // 
+        chkBlockInput.AutoSize = true;
+        chkBlockInput.Checked = true;
+        chkBlockInput.CheckState = CheckState.Checked;
+        chkBlockInput.Dock = DockStyle.Fill;
+        chkBlockInput.Font = new Font("Segoe UI", 9F);
+        chkBlockInput.Location = new Point(3, 183);
+        chkBlockInput.Name = "chkBlockInput";
+        chkBlockInput.Size = new Size(282, 24);
+        chkBlockInput.TabIndex = 6;
+        chkBlockInput.Text = "Block input while overlay is visible";
+        chkBlockInput.UseVisualStyleBackColor = true;
+        // 
+        // chkShowCard
+        // 
+        chkShowCard.AutoSize = true;
+        chkShowCard.Checked = true;
+        chkShowCard.CheckState = CheckState.Checked;
+        chkShowCard.Dock = DockStyle.Fill;
+        chkShowCard.Font = new Font("Segoe UI", 9F);
+        chkShowCard.Location = new Point(3, 213);
+        chkShowCard.Name = "chkShowCard";
+        chkShowCard.Size = new Size(282, 24);
+        chkShowCard.TabIndex = 7;
+        chkShowCard.Text = "Show centered card";
+        chkShowCard.UseVisualStyleBackColor = true;
+        // 
+        // lblModeCount
+        // 
+        lblModeCount.Dock = DockStyle.Fill;
+        lblModeCount.Font = new Font("Segoe UI", 8.5F);
+        lblModeCount.ForeColor = Color.DimGray;
+        lblModeCount.Location = new Point(3, 240);
+        lblModeCount.Name = "lblModeCount";
+        lblModeCount.Size = new Size(282, 1);
+        lblModeCount.TabIndex = 8;
+        lblModeCount.Text = "8 spinner modes available";
+        // 
+        // rightLayout
+        // 
+        rightLayout.ColumnCount = 1;
+        rightLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        rightLayout.Controls.Add(groupPreview, 0, 0);
+        rightLayout.Controls.Add(groupTarget, 0, 1);
+        rightLayout.Dock = DockStyle.Fill;
+        rightLayout.Location = new Point(333, 3);
+        rightLayout.Name = "rightLayout";
+        rightLayout.RowCount = 2;
+        rightLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 250F));
+        rightLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        rightLayout.Size = new Size(666, 522);
+        rightLayout.TabIndex = 1;
+        // 
+        // groupPreview
+        // 
+        groupPreview.Controls.Add(previewPanel);
+        groupPreview.Dock = DockStyle.Fill;
+        groupPreview.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        groupPreview.Location = new Point(3, 3);
+        groupPreview.Name = "groupPreview";
+        groupPreview.Padding = new Padding(12);
+        groupPreview.Size = new Size(660, 244);
+        groupPreview.TabIndex = 0;
+        groupPreview.TabStop = false;
+        groupPreview.Text = "Live Spinner Preview";
+        // 
+        // previewPanel
+        // 
+        previewPanel.BackColor = Color.FromArgb(245, 247, 250);
+        previewPanel.Controls.Add(previewCard);
+        previewPanel.Dock = DockStyle.Fill;
+        previewPanel.Location = new Point(12, 30);
+        previewPanel.Name = "previewPanel";
+        previewPanel.Padding = new Padding(20);
+        previewPanel.Size = new Size(636, 202);
+        previewPanel.TabIndex = 0;
+        // 
+        // previewCard
+        // 
+        previewCard.Anchor = AnchorStyles.None;
+        previewCard.BackColor = Color.White;
+        previewCard.BorderStyle = BorderStyle.FixedSingle;
+        previewCard.Controls.Add(liveSpinner);
+        previewCard.Controls.Add(lblPreviewTitle);
+        previewCard.Controls.Add(lblPreviewSubtitle);
+        previewCard.Location = new Point(171, 21);
+        previewCard.Name = "previewCard";
+        previewCard.Size = new Size(294, 160);
+        previewCard.TabIndex = 0;
+        // 
+        // liveSpinner
+        // 
+        liveSpinner.BackColor = Color.Transparent;
+        liveSpinner.Location = new Point(111, 18);
+        liveSpinner.Name = "liveSpinner";
+        liveSpinner.Size = new Size(72, 72);
+        liveSpinner.SpinnerColor = Color.FromArgb(0, 122, 204);
+        liveSpinner.TabIndex = 0;
+        liveSpinner.TrackColor = Color.Gainsboro;
+        // 
+        // lblPreviewTitle
+        // 
+        lblPreviewTitle.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+        lblPreviewTitle.ForeColor = Color.FromArgb(32, 32, 32);
+        lblPreviewTitle.Location = new Point(18, 96);
+        lblPreviewTitle.Name = "lblPreviewTitle";
+        lblPreviewTitle.Size = new Size(256, 24);
+        lblPreviewTitle.TabIndex = 1;
+        lblPreviewTitle.Text = "Arc";
+        lblPreviewTitle.TextAlign = ContentAlignment.MiddleCenter;
+        // 
+        // lblPreviewSubtitle
+        // 
+        lblPreviewSubtitle.Font = new Font("Segoe UI", 9F);
+        lblPreviewSubtitle.ForeColor = Color.DimGray;
+        lblPreviewSubtitle.Location = new Point(18, 122);
+        lblPreviewSubtitle.Name = "lblPreviewSubtitle";
+        lblPreviewSubtitle.Size = new Size(256, 22);
+        lblPreviewSubtitle.TabIndex = 2;
+        lblPreviewSubtitle.Text = "Animated preview";
+        lblPreviewSubtitle.TextAlign = ContentAlignment.MiddleCenter;
+        // 
+        // groupTarget
+        // 
+        groupTarget.Controls.Add(targetPanel);
+        groupTarget.Dock = DockStyle.Fill;
+        groupTarget.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        groupTarget.Location = new Point(3, 253);
+        groupTarget.Name = "groupTarget";
+        groupTarget.Padding = new Padding(12);
+        groupTarget.Size = new Size(660, 266);
+        groupTarget.TabIndex = 1;
+        groupTarget.TabStop = false;
+        groupTarget.Text = "Overlay Target Panel";
+        // 
+        // targetPanel
+        // 
+        targetPanel.BackColor = Color.FromArgb(250, 250, 252);
+        targetPanel.BorderStyle = BorderStyle.FixedSingle;
+        targetPanel.Controls.Add(lblTargetSubtitle);
+        targetPanel.Controls.Add(lblTargetTitle);
+        targetPanel.Dock = DockStyle.Fill;
+        targetPanel.Location = new Point(12, 30);
+        targetPanel.Name = "targetPanel";
+        targetPanel.Size = new Size(636, 224);
+        targetPanel.TabIndex = 0;
+        // 
+        // lblTargetSubtitle
+        // 
+        lblTargetSubtitle.Font = new Font("Segoe UI", 10F);
+        lblTargetSubtitle.ForeColor = Color.DimGray;
+        lblTargetSubtitle.Location = new Point(20, 112);
+        lblTargetSubtitle.Name = "lblTargetSubtitle";
+        lblTargetSubtitle.Size = new Size(594, 42);
+        lblTargetSubtitle.TabIndex = 1;
+        lblTargetSubtitle.Text = "Click an action on the left to display an overlay on this panel.";
+        lblTargetSubtitle.TextAlign = ContentAlignment.MiddleCenter;
+        // 
+        // lblTargetTitle
+        // 
+        lblTargetTitle.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+        lblTargetTitle.ForeColor = Color.FromArgb(36, 36, 36);
+        lblTargetTitle.Location = new Point(20, 68);
+        lblTargetTitle.Name = "lblTargetTitle";
+        lblTargetTitle.Size = new Size(594, 42);
+        lblTargetTitle.TabIndex = 0;
+        lblTargetTitle.Text = "Target Panel";
+        lblTargetTitle.TextAlign = ContentAlignment.MiddleCenter;
+        // 
+        // lblStatus
+        // 
+        lblStatus.Dock = DockStyle.Fill;
+        lblStatus.Font = new Font("Segoe UI", 9F);
+        lblStatus.ForeColor = Color.DimGray;
+        lblStatus.Location = new Point(19, 632);
+        lblStatus.Name = "lblStatus";
+        lblStatus.Size = new Size(1002, 32);
+        lblStatus.TabIndex = 2;
+        lblStatus.Text = "Ready";
+        lblStatus.TextAlign = ContentAlignment.MiddleLeft;
+        // 
         // Form1
+        // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(920, 640);
-        Controls.Add(tableMain);
-        MinimumSize = new Size(820, 560);
+        BackColor = Color.White;
+        ClientSize = new Size(1040, 680);
+        Controls.Add(mainLayout);
+        MinimumSize = new Size(960, 620);
         Name = "Form1";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "WinLoadingDialog Demo";
-
-        tableMain.ResumeLayout(false);
-        panelHeader.ResumeLayout(false);
-        panelHeader.PerformLayout();
-        groupSpinnerModes.ResumeLayout(false);
-        flowSpinnerModes.ResumeLayout(false);
-        groupThemes.ResumeLayout(false);
-        flowThemes.ResumeLayout(false);
-        groupStates.ResumeLayout(false);
-        flowStates.ResumeLayout(false);
-        groupPanelDemo.ResumeLayout(false);
-        tablePanelDemo.ResumeLayout(false);
-        panelDemoTarget.ResumeLayout(false);
-        flowPanelButtons.ResumeLayout(false);
+        Load += Form1_Load;
+        mainLayout.ResumeLayout(false);
+        headerPanel.ResumeLayout(false);
+        headerPanel.PerformLayout();
+        contentLayout.ResumeLayout(false);
+        leftPanel.ResumeLayout(false);
+        groupActions.ResumeLayout(false);
+        actionsLayout.ResumeLayout(false);
+        groupSettings.ResumeLayout(false);
+        settingsLayout.ResumeLayout(false);
+        settingsLayout.PerformLayout();
+        rightLayout.ResumeLayout(false);
+        groupPreview.ResumeLayout(false);
+        previewPanel.ResumeLayout(false);
+        previewCard.ResumeLayout(false);
+        groupTarget.ResumeLayout(false);
+        targetPanel.ResumeLayout(false);
         ResumeLayout(false);
     }
 
-    private static void ConfigureDemoButton(Button button, string text)
-    {
-        button.AutoSize = true;
-        button.Font = new Font("Segoe UI", 9F);
-        button.Margin = new Padding(4);
-        button.MinimumSize = new Size(110, 34);
-        button.Name = "btn" + text.Replace(" ", string.Empty);
-        button.Padding = new Padding(8, 2, 8, 2);
-        button.TabIndex = 0;
-        button.Text = text;
-        button.UseVisualStyleBackColor = true;
-    }
+    private TableLayoutPanel mainLayout;
+    private Panel headerPanel;
+    private Label lblHeaderTitle;
+    private Label lblHeaderSubtitle;
+    private TableLayoutPanel contentLayout;
 
-    private TableLayoutPanel tableMain;
-    private Panel panelHeader;
-    private Label lblTitle;
-    private Label lblSubtitle;
+    private Panel leftPanel;
+    private GroupBox groupSettings;
+    private TableLayoutPanel settingsLayout;
+    private Label lblSpinnerMode;
+    private ComboBox cmbSpinnerMode;
+    private Label lblTheme;
+    private ComboBox cmbTheme;
+    private Label lblTexts;
+    private ComboBox cmbTexts;
+    private CheckBox chkBlockInput;
+    private CheckBox chkShowCard;
+    private Label lblModeCount;
 
-    private GroupBox groupSpinnerModes;
-    private FlowLayoutPanel flowSpinnerModes;
-    private Button btnArc;
-    private Button btnCircle;
-    private Button btnCircularProgress;
-    private Button btnDots;
-    private Button btnPulse;
-    private Button btnRing;
-    private Button btnBars;
-    private Button btnDualRing;
-
-    private GroupBox groupThemes;
-    private FlowLayoutPanel flowThemes;
-    private Button btnLightTheme;
-    private Button btnDarkTheme;
-    private Button btnCustomTheme;
-    private Button btnTurkish;
-
-    private GroupBox groupStates;
-    private FlowLayoutPanel flowStates;
-    private Button btnSuccess;
-    private Button btnError;
+    private GroupBox groupActions;
+    private TableLayoutPanel actionsLayout;
+    private Button btnShowLoading;
+    private Button btnShowSuccess;
+    private Button btnShowError;
     private Button btnRunAsync;
     private Button btnBeginScope;
+    private Button btnShowFormOverlay;
+    private Button btnHideAll;
 
-    private GroupBox groupPanelDemo;
-    private TableLayoutPanel tablePanelDemo;
-    private Panel panelDemoTarget;
-    private Label lblPanelDemo;
-    private FlowLayoutPanel flowPanelButtons;
-    private Button btnPanelLoading;
-    private Button btnPanelSuccess;
-    private Button btnPanelError;
+    private TableLayoutPanel rightLayout;
+    private GroupBox groupPreview;
+    private Panel previewPanel;
+    private Panel previewCard;
+    private Spinner liveSpinner;
+    private Label lblPreviewTitle;
+    private Label lblPreviewSubtitle;
+
+    private GroupBox groupTarget;
+    private Panel targetPanel;
+    private Label lblTargetTitle;
+    private Label lblTargetSubtitle;
+
+    private Label lblStatus;
 }

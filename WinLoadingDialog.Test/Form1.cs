@@ -11,119 +11,199 @@ public partial class Form1 : Form
     public Form1()
     {
         InitializeComponent();
-        btnArc.Click += btnArc_Click;
-        btnCircle.Click += btnCircle_Click;
-        btnCircularProgress.Click += btnCircularProgress_Click;
-        btnDots.Click += btnDots_Click;
-        btnPulse.Click += btnPulse_Click;
-        btnRing.Click += btnRing_Click;
-        btnBars.Click += btnBars_Click;
-        btnDualRing.Click += btnDualRing_Click;
-        btnLightTheme.Click += btnLightTheme_Click;
-        btnDarkTheme.Click += btnDarkTheme_Click;
-        btnCustomTheme.Click += btnCustomTheme_Click;
-        btnTurkish.Click += btnTurkish_Click;
-        btnSuccess.Click += btnSuccess_Click;
-        btnError.Click += btnError_Click;
-        btnRunAsync.Click += btnRunAsync_Click;
-        btnBeginScope.Click += btnBeginScope_Click;
-        btnPanelLoading.Click += btnPanelLoading_Click;
-        btnPanelSuccess.Click += btnPanelSuccess_Click;
-        btnPanelError.Click += btnPanelError_Click;
     }
 
-    private async Task ShowSpinnerDemoAsync(SpinnerMode mode)
+    private void Form1_Load(object? sender, EventArgs e)
     {
-        LoadingOptions options = new()
+        cmbSpinnerMode.DataSource = Enum.GetValues<SpinnerMode>();
+
+        cmbTheme.Items.Add("System");
+        cmbTheme.Items.Add("Light");
+        cmbTheme.Items.Add("Dark");
+        cmbTheme.Items.Add("Custom");
+        cmbTheme.SelectedIndex = 0;
+
+        cmbTexts.Items.Add("English");
+        cmbTexts.Items.Add("Turkish");
+        cmbTexts.SelectedIndex = 0;
+
+        chkBlockInput.CheckedChanged += PreviewSettingChanged;
+        chkShowCard.CheckedChanged += PreviewSettingChanged;
+
+        ApplyLivePreview();
+    }
+
+    private void cmbSpinnerMode_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        ApplyLivePreview();
+    }
+
+    private void cmbTheme_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        ApplyLivePreview();
+    }
+
+    private void cmbTexts_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        ApplyLivePreview();
+    }
+
+    private void PreviewSettingChanged(object? sender, EventArgs e)
+    {
+        ApplyLivePreview();
+    }
+
+    private async void btnShowLoading_Click(object? sender, EventArgs e)
+    {
+        LoadingOptions options = CreateOptions("Loading on target panel...");
+
+        SetStatus("Showing loading overlay on target panel.");
+
+        LoadingService.Show(targetPanel, options);
+
+        await Task.Delay(1600);
+
+        LoadingService.Hide(targetPanel);
+
+        SetStatus("Target panel loading overlay hidden.");
+    }
+
+    private void btnShowSuccess_Click(object? sender, EventArgs e)
+    {
+        LoadingOptions options = CreateOptions().WithSuccess(
+            message: GetTexts() == LoadingTexts.Turkish
+                ? "İşlem başarıyla tamamlandı."
+                : "Operation completed successfully.",
+            title: GetTexts() == LoadingTexts.Turkish
+                ? "Tamamlandı"
+                : "Completed");
+
+        SetStatus("Showing success state.");
+
+        LoadingService.Success(targetPanel, options);
+    }
+
+    private void btnShowError_Click(object? sender, EventArgs e)
+    {
+        LoadingOptions options = CreateOptions().WithError(
+            message: GetTexts() == LoadingTexts.Turkish
+                ? "Bir hata oluştu."
+                : "Something went wrong.",
+            title: GetTexts() == LoadingTexts.Turkish
+                ? "Hata"
+                : "Error");
+
+        SetStatus("Showing error state.");
+
+        LoadingService.Error(targetPanel, options);
+    }
+
+    private async void btnRunAsync_Click(object? sender, EventArgs e)
+    {
+        SetStatus("RunAsync demo started.");
+
+        await LoadingService.RunAsync(
+            targetPanel,
+            async () =>
+            {
+                await Task.Delay(1700);
+            },
+            CreateOptions("RunAsync is executing..."));
+
+        SetStatus("RunAsync demo completed.");
+    }
+
+    private async void btnBeginScope_Click(object? sender, EventArgs e)
+    {
+        SetStatus("Begin scope demo started.");
+
+        using (LoadingService.Begin(targetPanel, CreateOptions("Begin scope is active...")))
         {
-            Message = $"{mode} spinner is running...",
-            SpinnerMode = mode,
-            Theme = LoadingTheme.System,
-            Texts = LoadingTexts.English
-        };
+            await Task.Delay(1700);
+        }
+
+        SetStatus("Begin scope demo completed.");
+    }
+
+    private async void btnShowFormOverlay_Click(object? sender, EventArgs e)
+    {
+        LoadingOptions options = CreateOptions("This overlay is attached to the whole form.");
+
+        SetStatus("Showing form-level overlay.");
 
         LoadingService.Show(this, options);
 
-        await Task.Delay(1400);
+        await Task.Delay(1600);
 
-        LoadingService.Success(this, options.WithSuccess($"{mode} demo completed."));
+        LoadingService.Success(this, options.WithSuccess("Form overlay completed."));
+
+        SetStatus("Form-level overlay completed.");
     }
 
-    private async void btnArc_Click(object? sender, EventArgs e)
+    private void btnHideAll_Click(object? sender, EventArgs e)
     {
-        await ShowSpinnerDemoAsync(SpinnerMode.Arc);
+        LoadingService.ForceDispose();
+
+        SetStatus("All overlays disposed.");
     }
 
-    private async void btnCircle_Click(object? sender, EventArgs e)
+    private LoadingOptions CreateOptions(string? message = null)
     {
-        await ShowSpinnerDemoAsync(SpinnerMode.Circle);
-    }
+        LoadingTexts texts = GetTexts();
 
-    private async void btnCircularProgress_Click(object? sender, EventArgs e)
-    {
-        await ShowSpinnerDemoAsync(SpinnerMode.CircularProgress);
-    }
+        string resolvedMessage = message ??
+            (texts == LoadingTexts.Turkish
+                ? "Veriler yükleniyor..."
+                : "Loading data...");
 
-    private async void btnDots_Click(object? sender, EventArgs e)
-    {
-        await ShowSpinnerDemoAsync(SpinnerMode.Dots);
-    }
-
-    private async void btnPulse_Click(object? sender, EventArgs e)
-    {
-        await ShowSpinnerDemoAsync(SpinnerMode.Pulse);
-    }
-
-    private async void btnRing_Click(object? sender, EventArgs e)
-    {
-        await ShowSpinnerDemoAsync(SpinnerMode.Ring);
-    }
-
-    private async void btnBars_Click(object? sender, EventArgs e)
-    {
-        await ShowSpinnerDemoAsync(SpinnerMode.Bars);
-    }
-
-    private async void btnDualRing_Click(object? sender, EventArgs e)
-    {
-        await ShowSpinnerDemoAsync(SpinnerMode.DualRing);
-    }
-
-    private async void btnLightTheme_Click(object? sender, EventArgs e)
-    {
-        LoadingOptions options = new()
+        return new LoadingOptions
         {
-            Theme = LoadingTheme.Light,
-            SpinnerMode = SpinnerMode.Ring,
-            Message = "Light theme loading..."
+            Message = resolvedMessage,
+            Texts = texts,
+            Theme = GetTheme(),
+            SpinnerMode = GetSpinnerMode(),
+            BlockInput = chkBlockInput.Checked,
+            ShowCard = chkShowCard.Checked
         };
-
-        LoadingService.Show(this, options);
-
-        await Task.Delay(1200);
-
-        LoadingService.Success(this, options.WithSuccess("Light theme completed."));
     }
 
-    private async void btnDarkTheme_Click(object? sender, EventArgs e)
+    private SpinnerMode GetSpinnerMode()
     {
-        LoadingOptions options = new()
+        return cmbSpinnerMode.SelectedItem is SpinnerMode mode
+            ? mode
+            : SpinnerMode.Arc;
+    }
+
+    private LoadingTexts GetTexts()
+    {
+        string? value = cmbTexts.SelectedItem?.ToString();
+
+        return value == "Turkish"
+            ? LoadingTexts.Turkish
+            : LoadingTexts.English;
+    }
+
+    private LoadingTheme GetTheme()
+    {
+        string? value = cmbTheme.SelectedItem?.ToString();
+
+        return value switch
         {
-            Theme = LoadingTheme.Dark,
-            SpinnerMode = SpinnerMode.DualRing,
-            Message = "Dark theme loading..."
+            "Light" => LoadingTheme.Light,
+            "Dark" => LoadingTheme.Dark,
+            "Custom" => LoadingTheme.FromPalette(CreateCustomPalette()),
+            _ => LoadingTheme.System
         };
-
-        LoadingService.Show(this, options);
-
-        await Task.Delay(1200);
-
-        LoadingService.Success(this, options.WithSuccess("Dark theme completed."));
     }
 
-    private async void btnCustomTheme_Click(object? sender, EventArgs e)
+    private LoadingPalette ResolvePreviewPalette()
     {
-        LoadingPalette palette = new()
+        return GetTheme().Resolve(previewPanel);
+    }
+
+    private static LoadingPalette CreateCustomPalette()
+    {
+        return new LoadingPalette
         {
             OverlayBackColor = Color.FromArgb(120, 30, 20, 70),
             CardBackColor = Color.FromArgb(252, 248, 255),
@@ -135,119 +215,47 @@ public partial class Form1 : Form
             SuccessColor = Color.FromArgb(30, 150, 100),
             ErrorColor = Color.FromArgb(210, 70, 90)
         };
-
-        LoadingOptions options = new()
-        {
-            Theme = LoadingTheme.FromPalette(palette),
-            SpinnerMode = SpinnerMode.Dots,
-            Message = "Custom theme loading..."
-        };
-
-        LoadingService.Show(this, options);
-
-        await Task.Delay(1200);
-
-        LoadingService.Success(this, options.WithSuccess("Custom theme completed."));
     }
 
-    private async void btnTurkish_Click(object? sender, EventArgs e)
+    private void ApplyLivePreview()
     {
-        LoadingOptions options = new()
-        {
-            Texts = LoadingTexts.Turkish,
-            Theme = LoadingTheme.Light,
-            SpinnerMode = SpinnerMode.Circle,
-            Message = "Veriler yükleniyor..."
-        };
+        SpinnerMode mode = GetSpinnerMode();
+        LoadingTexts texts = GetTexts();
+        LoadingPalette palette = ResolvePreviewPalette();
 
-        LoadingService.Show(this, options);
+        liveSpinner.Mode = mode;
+        liveSpinner.ApplyPalette(palette);
+        liveSpinner.Start();
 
-        await Task.Delay(1200);
+        previewCard.BackColor = palette.CardBackColor;
+        lblPreviewTitle.ForeColor = palette.TitleForeColor;
+        lblPreviewSubtitle.ForeColor = palette.MessageForeColor;
 
-        LoadingService.Success(this, options.WithSuccess("İşlem başarıyla tamamlandı."));
+        lblPreviewTitle.Text = mode.ToString();
+        lblPreviewSubtitle.Text = texts == LoadingTexts.Turkish
+            ? "Canlı animasyon önizlemesi"
+            : "Live animation preview";
+
+        targetPanel.BackColor = GetTheme() == LoadingTheme.Dark
+            ? Color.FromArgb(38, 38, 38)
+            : Color.FromArgb(250, 250, 252);
+
+        lblTargetTitle.ForeColor = palette.TitleForeColor;
+        lblTargetSubtitle.ForeColor = palette.MessageForeColor;
+
+        lblTargetTitle.Text = texts == LoadingTexts.Turkish
+            ? "Hedef Panel"
+            : "Target Panel";
+
+        lblTargetSubtitle.Text = texts == LoadingTexts.Turkish
+            ? "Soldaki aksiyonlarla overlay'i bu panel üzerinde test edebilirsin."
+            : "Use the actions on the left to test the overlay on this panel.";
+
+        lblModeCount.Text = "8 spinner modes available";
     }
 
-    private void btnSuccess_Click(object? sender, EventArgs e)
+    private void SetStatus(string text)
     {
-        LoadingService.Success(this, new LoadingOptions
-        {
-            Message = "This message is ignored for success state.",
-            SuccessMessage = "Operation completed successfully.",
-            SpinnerMode = SpinnerMode.Arc,
-            Theme = LoadingTheme.System
-        });
-    }
-
-    private void btnError_Click(object? sender, EventArgs e)
-    {
-        LoadingService.Error(this, new LoadingOptions
-        {
-            ErrorMessage = "Something went wrong.",
-            SpinnerMode = SpinnerMode.Arc,
-            Theme = LoadingTheme.System
-        });
-    }
-
-    private async void btnRunAsync_Click(object? sender, EventArgs e)
-    {
-        await LoadingService.RunAsync(
-            this,
-            async () =>
-            {
-                await Task.Delay(1600);
-            },
-            new LoadingOptions
-            {
-                Message = "RunAsync helper is executing...",
-                SpinnerMode = SpinnerMode.CircularProgress,
-                Theme = LoadingTheme.System
-            });
-    }
-
-    private async void btnBeginScope_Click(object? sender, EventArgs e)
-    {
-        using (LoadingService.Begin(this, new LoadingOptions
-        {
-            Message = "Begin scope is active...",
-            SpinnerMode = SpinnerMode.Pulse,
-            Theme = LoadingTheme.System
-        }))
-        {
-            await Task.Delay(1600);
-        }
-    }
-
-    private async void btnPanelLoading_Click(object? sender, EventArgs e)
-    {
-        LoadingOptions options = new()
-        {
-            Message = "Panel is loading...",
-            SpinnerMode = SpinnerMode.Bars,
-            Theme = LoadingTheme.Light
-        };
-
-        LoadingService.Show(panelDemoTarget, options);
-
-        await Task.Delay(1500);
-
-        LoadingService.Hide(panelDemoTarget);
-    }
-
-    private void btnPanelSuccess_Click(object? sender, EventArgs e)
-    {
-        LoadingService.Success(panelDemoTarget, new LoadingOptions
-        {
-            Theme = LoadingTheme.Light,
-            SuccessMessage = "Panel operation completed."
-        });
-    }
-
-    private void btnPanelError_Click(object? sender, EventArgs e)
-    {
-        LoadingService.Error(panelDemoTarget, new LoadingOptions
-        {
-            Theme = LoadingTheme.Light,
-            ErrorMessage = "Panel operation failed."
-        });
+        lblStatus.Text = text;
     }
 }

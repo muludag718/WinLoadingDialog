@@ -1,24 +1,54 @@
 # WinLoadingDialog
 
-A lightweight, modern, and customizable loading overlay component for Windows Forms applications.
+<p align="center">
+  <strong>A modern, customizable loading overlay component for Windows Forms applications.</strong>
+</p>
 
-WinLoadingDialog helps you display clean loading dialogs on forms, panels, or any WinForms control. It supports multiple spinner animations, success/error states, themes, localization-friendly text configuration, async helper methods, and target-based session management.
+<p align="center">
+  <img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet" alt=".NET 8" />
+  <img src="https://img.shields.io/badge/Platform-Windows-0078D4?style=flat-square&logo=windows" alt="Windows" />
+  <img src="https://img.shields.io/badge/UI-WinForms-5C2D91?style=flat-square" alt="WinForms" />
+  <img src="https://img.shields.io/badge/Tests-NUnit-25A162?style=flat-square" alt="NUnit" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
+</p>
+
+WinLoadingDialog helps you display clean loading overlays on forms, panels, or any WinForms control.  
+It supports multiple spinner animations, success/error states, themes, localization-friendly text configuration, async helper methods, and target-based session management.
+
+---
+
+<p align="center">
+  <img src="docs/demo.gif" alt="WinLoadingDialog animated demo" width="820" />
+</p>
+
+<p align="center">
+  <em>Animated demo showing spinner preview, overlay target panel, success state, themes and loading behavior.</em>
+</p>
 
 ---
 
 ## ✨ Features
 
-- Form-level and control-level loading overlays
-- 8 built-in spinner modes
-- Light, dark, system, and custom themes
-- English, Turkish, and custom text support
-- Success and error result states
-- Async helper methods
-- Disposable loading scopes
-- Target-based session management
-- DPI-aware responsive layout
-- MVP-style internal structure
-- Clean public API through `LoadingService`
+- 🪟 Form-level and control-level loading overlays
+- 🌀 8 built-in spinner modes
+- 🎨 Light, dark, system, and custom themes
+- 🌍 English, Turkish, and custom text support
+- ✅ Success and error result states
+- ⚡ Async helper methods
+- 📦 Disposable loading scopes
+- 🎯 Target-based session management
+- 📐 DPI-aware responsive layout
+- 🧱 MVP-style internal structure
+- 🧪 Unit-tested foundation
+- 🧼 Clean public API through `LoadingService`
+
+---
+
+## 📸 Screenshot
+
+<p align="center">
+  <img src="docs/screenshot.png" alt="WinLoadingDialog demo screenshot" width="820" />
+</p>
 
 ---
 
@@ -36,8 +66,6 @@ WinLoadingDialog includes 8 spinner modes:
 | `Ring` | Rotating ring animation |
 | `Bars` | Animated vertical bars |
 | `DualRing` | Two rotating rings moving in opposite directions |
-
-Example:
 
 ```csharp
 LoadingService.Show(this, new LoadingOptions
@@ -77,7 +105,8 @@ LoadingService.Success(this, "Saved successfully.");
 
 ## ⚙️ Using LoadingOptions
 
-`LoadingOptions` is the main configuration object. You can use it to control text, theme, spinner mode, success/error messages, and behavior.
+`LoadingOptions` is the main configuration object.  
+You can use it to control text, theme, spinner mode, success/error messages, and behavior.
 
 ```csharp
 using WinLoadingDialog.Controls;
@@ -99,7 +128,7 @@ LoadingService.Show(this, new LoadingOptions
 
 ## 🌍 Localization / Texts
 
-The default text language is English.
+The default text language is **English**.
 
 ### English
 
@@ -263,7 +292,8 @@ await LoadingService.RunAsync(
 
 ## 📦 Begin Scope
 
-`Begin` returns an `IDisposable`. When the scope is disposed, the overlay is hidden automatically.
+`Begin` returns an `IDisposable`.  
+When the scope is disposed, the overlay is hidden automatically.
 
 ```csharp
 using (LoadingService.Begin(this, "Loading..."))
@@ -290,7 +320,7 @@ LoadingService.Show(panel1, new LoadingOptions
 
 ---
 
-## 🧠 Multiple Targets
+## 🎯 Multiple Targets
 
 Each target has its own loading session.
 
@@ -380,16 +410,16 @@ The included demo project shows:
 
 ---
 
-## 📌 Roadmap Ideas
+## 🧭 Roadmap Ideas
 
 Possible future improvements:
 
-- NuGet package publishing
-- More spinner animations
-- Built-in progress percentage support
-- Cancellation button support
-- More localization presets
-- Unit tests for core/session behavior
+- 🚀 NuGet package publishing
+- 🌀 More spinner animations
+- 📊 Built-in progress percentage support
+- 🛑 Cancellation button support
+- 🌐 More localization presets
+- 🧪 More core/session behavior tests
 
 ---
 
